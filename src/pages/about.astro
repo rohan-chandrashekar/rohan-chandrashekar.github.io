@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MotionReveal from '../components/MotionReveal.tsx';
+import PremiumTimeline from '../components/PremiumTimeline';
+import MarqueeRibbons from '../components/MarqueeRibbons';
+import LinkedInRecommendations from '../components/LinkedInRecommendations';
+import { profile } from '../lib/constants/profile';
+
+const skills = ["Software Development", "Cybersecurity", "Cryptography", "Big Data Processing", "Automation", "Machine Learning", "Artificial Intelligence", "Natural Language Processing", "Deep Learning", "Quantum Computing", "Post Quantum Cryptography"];
+const technologies = ["C", "C++", "Python", "TensorFlow", "PyTorch", "Git", "Docker", "Kubernetes", "Scikit-Learn", "Numpy"];
+
+const experienceItems = profile.experience.map((e) => ({
+  title: e.title,
+  subtitle: `${e.org}${e.team ? ` · ${e.team}` : ''}`,
+  logo: (e as any).logo,
+  date: `${e.start} – ${e.end}`,
+  bullets: e.highlights || [],
+}));
+
+const educationItems = profile.education.map((e) => ({
+  title: e.school,
+  subtitle: e.degree + (e.notes ? ` · ${e.notes}` : ''),
+  logo: (e as any).logo,
+  //hideLogo: e.hideLogo,
+  date: e.when,
+}));
+---
+
+<BaseLayout title="About">
+  <section class="mx-auto max-w-6xl px-4 py-8">
+    <h1 class="page-title">About</h1>
+    <div class="accent-bar"></div>
+<p class="page-subtitle">
+      {profile.tagline}
+    </p>
+    <MarqueeRibbons client:load skills={skills} technologies={technologies} className="mt-6" />
+<div class="mt-10 grid gap-6 md:grid-cols-2">
+      <MotionReveal client:load>
+        <div class="card rounded-3xl p-6">
+          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-50">Experience</h2>
+          <div class="mt-5">
+            <PremiumTimeline client:load items={experienceItems} />
+          </div>
+        </div>
+      </MotionReveal>
+
+      <MotionReveal client:load>
+        <div class="card rounded-3xl p-6">
+          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-50">Education</h2>
+          <div class="mt-5">
+            <PremiumTimeline client:load items={educationItems} compact />
+          </div>
+        </div>
+      </MotionReveal>
+    </div>
+  </section>
+
+  <LinkedInRecommendations client:load items={profile.recommendations} />
+</BaseLayout>

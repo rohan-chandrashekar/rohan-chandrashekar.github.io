@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResearchExplorer from '../components/ResearchExplorer';
+import { profile } from '../lib/constants/profile';
+---
+
+<BaseLayout title={`${profile.name} — Research`} description="Research and publications">
+  <div class="mt-6">
+    <h1 class="page-title">Research</h1>
+    <div class="accent-bar"></div>
+<p class="page-subtitle">
+      Research papers, talks, journal submissions, and white papers—directly linked.
+    </p>
+  </div>
+
+  <div class="mt-8">
+    <ResearchExplorer client:load items={profile.research} />
+  </div>
+</BaseLayout>

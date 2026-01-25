@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero';
+import HomeHighlights from '../components/HomeHighlights';
+import ProofSection from '../components/ProofSection';
+import ContactSection from '../components/ContactSection';
+import { profile } from '../lib/constants/profile';
+---
+
+<BaseLayout title={`${profile.name} — Portfolio`} description="Personal portfolio">
+  <Hero
+    client:load
+    greeting={profile.hero.greeting}
+    paragraphs={profile.hero.paragraphs}
+    imageSrc={profile.hero.heroImage.src}
+    imageAlt={profile.hero.heroImage.alt}
+  />
+
+  <ProofSection client:load proof={profile.proof} />
+
+
+
+  
+  <HomeHighlights
+    client:load
+    title={profile.homeSection.title}
+    subtitle={profile.homeSection.subtitle}
+    highlights={profile.homeSection.highlights}
+  />
+  <ContactSection client:load email={profile.contactEmail} />
+
+
+</BaseLayout>

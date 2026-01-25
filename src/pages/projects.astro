@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MotionReveal from '../components/MotionReveal';
+import CaseStudyGrid from '../components/CaseStudyGrid';
+import MagneticButton from '../components/MagneticButton';
+import { profile } from '../lib/constants/profile';
+
+const otherBuilds = profile.otherBuilds ?? [];
+---
+
+<BaseLayout title={`${profile.name} — Projects`} description="Case studies and projects">
+  <div class="mt-6">
+    <h1 class="page-title">Projects</h1>
+    <div class="accent-bar"></div>
+    <p class="page-subtitle">
+      A curated set of technical builds — engineered, shipped, and iterated with real-world constraints in mind.
+    </p>
+  </div>
+
+  <CaseStudyGrid client:load studies={profile.caseStudies} />
+
+      {otherBuilds.length ? (
+        <section class="mt-10">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Other Builds</h2>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                Smaller experiments & utilities — quick to scan, fun to explore.
+              </p>
+            </div>
+            <a
+              class="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 underline decoration-slate-300 underline-offset-4 hover:decoration-slate-500 dark:text-slate-100 dark:decoration-slate-700 dark:hover:decoration-slate-500"
+              href={profile.links.github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View all on GitHub
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="relative mt-4">
+            <div class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-950 to-transparent"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-950 to-transparent"></div>
+
+            <div class="flex gap-3 overflow-x-auto pb-2 pr-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory">
+              {otherBuilds.map((b) => (
+                <a
+                  class="group relative min-w-[260px] snap-start overflow-hidden rounded-2xl border border-slate-200 bg-white/60 p-4 shadow-[0_18px_45px_rgba(16,24,40,0.06)] backdrop-blur transition hover:shadow-soft dark:border-slate-800/60 dark:bg-slate-950/35"
+                  href={b.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="min-w-0">
+                      <div class="flex flex-wrap items-center gap-2">
+                        <div class="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">{b.title}</div>
+                        {b.private ? (
+                          <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white/70 px-2 py-0.5 text-[11px] font-semibold text-slate-700 dark:border-slate-800/60 dark:bg-slate-950/40 dark:text-slate-200">
+                            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                              <path d="M6 11h12v10H6z" />
+                            </svg>
+                            Private
+                          </span>
+                        ) : null}
+                      </div>
+
+                      <p class="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300 line-clamp-2">
+                        {b.subtitle}
+                      </p>
+                    </div>
+
+                    <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-slate-700 transition group-hover:text-slate-900 dark:text-slate-200 dark:group-hover:text-slate-50" fill="currentColor" aria-hidden="true">
+                      <path d="M12 0.297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385 0.6 0.113 0.82-0.258 0.82-0.577 0-0.285-0.01-1.04-0.015-2.04 -3.338 0.724-4.042-1.61-4.042-1.61 -0.546-1.387-1.333-1.756-1.333-1.756 -1.09-0.745 0.083-0.73 0.083-0.73 1.205 0.085 1.84 1.24 1.84 1.24 1.07 1.835 2.807 1.305 3.492 0.998 0.108-0.776 0.417-1.305 0.76-1.605 -2.665-0.3-5.466-1.332-5.466-5.93 0-1.31 0.468-2.38 1.236-3.22 -0.123-0.303-0.536-1.523 0.117-3.176 0 0 1.008-0.322 3.3 1.23 0.957-0.266 1.983-0.399 3.003-0.404 1.02 0.005 2.047 0.138 3.006 0.404 2.29-1.552 3.297-1.23 3.297-1.23 0.655 1.653 0.242 2.873 0.12 3.176 0.77 0.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.92 0.43 0.37 0.823 1.103 0.823 2.222 0 1.606-0.015 2.898-0.015 3.293 0 0.32 0.216 0.694 0.825 0.576 4.765-1.58 8.2-6.08 8.2-11.38 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  </div>
+
+                  <div class="mt-3 flex flex-wrap gap-1.5">
+                    {(b.tags ?? []).map((t) => (
+                      <span class="rounded-full border border-slate-200 bg-white/70 px-2 py-0.5 text-[11px] font-semibold text-slate-700 dark:border-slate-800/60 dark:bg-slate-950/40 dark:text-slate-200">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+
+  <div class="mt-10 grid grid-cols-1 gap-5">
+    <MotionReveal client:load>
+      <div class="card rounded-3xl p-6" data-spotlight>
+        <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Source</div>
+        <div class="mt-2 text-xl font-semibold tracking-tight text-slate-950 dark:text-slate-50">
+          GitHub (code, demos, prototypes)
+        </div>
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-300">
+          Browse repositories, experiments, and source code. If you’re reviewing me for a role, start with the projects above — they provide context behind the commits.
+        </p>
+
+        <div class="mt-4">
+          <a
+            href={profile.links.github}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-slate-50 underline"
+          >
+            {profile.links.github}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </MotionReveal>
+  </div>
+</BaseLayout>

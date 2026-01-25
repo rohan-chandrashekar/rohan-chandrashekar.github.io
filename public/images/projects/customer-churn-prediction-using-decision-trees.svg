@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f2806d"/>
+      <stop offset="0.55" stop-color="#c9e567"/>
+      <stop offset="1" stop-color="#89f9d4"/>
+    </linearGradient>
+    <radialGradient id="r" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="38"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <rect width="1600" height="900" fill="url(#r)"/>
+  <g filter="url(#blur)">
+    <circle cx="241" cy="99" r="257" fill="#ffffff" opacity="0.19"/>
+    <circle cx="310" cy="274" r="120" fill="#ffffff" opacity="0.23"/>
+    <circle cx="676" cy="168" r="155" fill="#ffffff" opacity="0.14"/>
+    <circle cx="972" cy="369" r="159" fill="#ffffff" opacity="0.25"/>
+    <circle cx="889" cy="423" r="277" fill="#ffffff" opacity="0.17"/>
+    <circle cx="487" cy="60" r="165" fill="#ffffff" opacity="0.19"/>
+  </g>
+  <g opacity="0.42">
+    <path d="M-120 720 C 240 520, 520 980, 920 760 S 1580 620, 1760 820 L 1760 980 L -120 980 Z" fill="#0b1220"/>
+  </g>
+  <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" fill="#0b1220">
+    <text x="86" y="820" font-size="42" font-weight="700" opacity="0.92">{short}</text>
+    <text x="88" y="862" font-size="20" font-weight="600" opacity="0.65">Case study</text>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ActivitiesFeedSide from '../components/ActivitiesFeedSide';
+import { profile } from '../lib/constants/profile';
+---
+
+<BaseLayout title={`${profile.name} — Activities`} description="Volunteering, edu-ventures, and corporate activities">
+  <div class="mt-6">
+    <h1 class="page-title">Activities</h1>
+    <div class="accent-bar"></div>
+
+    <p class="page-subtitle">
+      The experiences that shaped my curiosity, leadership, and community spirit — all in one place.
+    </p>
+  </div>
+
+  <div class="mt-10">
+    <ActivitiesFeedSide client:load />
+  </div>
+</BaseLayout>

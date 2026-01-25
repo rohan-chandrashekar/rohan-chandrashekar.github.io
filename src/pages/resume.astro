@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Resume" description="Resume">
+  <div class="mt-6">
+    <h1 class="page-title">Resume</h1>
+    <div class="accent-bar"></div>
+
+    <div class="mt-8 card overflow-hidden rounded-3xl">
+      <iframe
+        src="/resume.pdf"
+        title="Resume PDF"
+        class="h-[80vh] w-full"
+      />
+    </div>
+  </div>
+</BaseLayout>
