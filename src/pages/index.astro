@@ -1,33 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero';
+import FeaturedProjects from '../components/FeaturedProjects.astro';
 import HomeHighlights from '../components/HomeHighlights';
 import ProofSection from '../components/ProofSection';
 import ContactSection from '../components/ContactSection';
 import { profile } from '../lib/constants/profile';
+
+// Recruiter path: keep the homepage milestones recent + professional.
+// The full journey (school trips, sports, etc.) lives on the Activities page.
+const recentHighlights = profile.homeSection.highlights.slice(0, 8);
+
+const ctas = [
+  { label: 'View Resume', href: profile.links.resume, external: true, primary: true },
+  { label: 'GitHub', href: profile.links.github, external: true },
+  { label: 'LinkedIn', href: profile.links.linkedin, external: true },
+  { label: 'Ask AI about me', href: '#ask-ai' },
+];
 ---
 
-<BaseLayout title={`${profile.name} — Portfolio`} description="Personal portfolio">
+<BaseLayout title={`${profile.name} — Portfolio`}>
   <Hero
     client:load
     greeting={profile.hero.greeting}
-    paragraphs={profile.hero.paragraphs}
+    oneLiner={profile.heroV2.oneLiner}
+    chips={profile.heroV2.chips}
+    ctas={ctas}
+    paragraphs={[profile.heroV2.intro]}
     imageSrc={profile.hero.heroImage.src}
     imageAlt={profile.hero.heroImage.alt}
   />
 
+  <FeaturedProjects />
+
   <ProofSection client:load proof={profile.proof} />
 
-
-
-  
   <HomeHighlights
     client:load
-    title={profile.homeSection.title}
-    subtitle={profile.homeSection.subtitle}
-    highlights={profile.homeSection.highlights}
+    title="Recent milestones"
+    subtitle="The latest from my journey — the full story is on the Activities page."
+    highlights={recentHighlights}
   />
+
   <ContactSection client:load email={profile.contactEmail} />
-
-
 </BaseLayout>

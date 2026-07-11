@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rohan-chandrashekar.github.io/sitemap-index.xml

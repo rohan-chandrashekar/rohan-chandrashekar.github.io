@@ -1,18 +1,62 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// To update the resume: just replace public/resume.pdf with the new file
+// (keep the same filename). Nothing else needs to change.
+const resumeUrl = '/resume.pdf';
 ---
 
-<BaseLayout title="Resume" description="Resume">
+<BaseLayout title="Resume — Rohan Chandrashekar" description="Resume of Rohan Chandrashekar — MSCS @ ASU, ex-HPE Cybersecurity & AI.">
   <div class="mt-6">
-    <h1 class="page-title">Resume</h1>
-    <div class="accent-bar"></div>
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h1 class="page-title">Resume</h1>
+        <div class="accent-bar"></div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <a
+          href={resumeUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
+        >
+          Open in new tab ↗
+        </a>
+        <a
+          href={resumeUrl}
+          download="Rohan-Chandrashekar-Resume.pdf"
+          class="rounded-full border border-slate-200/70 bg-white/60 px-4 py-2 text-sm font-semibold text-slate-800 backdrop-blur transition hover:bg-white dark:border-slate-800/70 dark:bg-slate-950/40 dark:text-slate-100 dark:hover:bg-slate-950/70"
+        >
+          Download PDF
+        </a>
+      </div>
+    </div>
 
     <div class="mt-8 card overflow-hidden rounded-3xl">
-      <iframe
-        src="/resume.pdf"
-        title="Resume PDF"
-        class="h-[80vh] w-full"
-      />
+      <object data={resumeUrl} type="application/pdf" class="h-[80vh] w-full" aria-label="Resume PDF">
+        <div class="flex h-[40vh] flex-col items-center justify-center gap-4 p-8 text-center">
+          <p class="text-slate-700 dark:text-slate-300">
+            Your browser can't display PDFs inline — no problem.
+          </p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <a
+              href={resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              class="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
+            >
+              Open the resume ↗
+            </a>
+            <a
+              href={resumeUrl}
+              download="Rohan-Chandrashekar-Resume.pdf"
+              class="rounded-full border border-slate-200/70 bg-white/60 px-5 py-2.5 text-sm font-semibold text-slate-800 backdrop-blur transition hover:bg-white dark:border-slate-800/70 dark:bg-slate-950/40 dark:text-slate-100 dark:hover:bg-slate-950/70"
+            >
+              Download PDF
+            </a>
+          </div>
+        </div>
+      </object>
     </div>
   </div>
 </BaseLayout>
