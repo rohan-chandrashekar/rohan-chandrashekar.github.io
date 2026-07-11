@@ -15,6 +15,22 @@ export const profile = {
     resume: "/resume.pdf",
   },
 
+  // V2 recruiter-first hero
+  heroV2: {
+    oneLiner: "MSCS @ ASU · ex-HPE Cybersecurity & AI · 3 publications · IEEE Best Paper '23",
+    intro:
+      "I build AI-driven security systems — from NVIDIA Morpheus cyber-defense pipelines at HPE to agentic multi-agent architectures, with research spanning NLP, federated learning, and post-quantum cryptography.",
+    chips: ["Agentic AI", "Cybersecurity", "ML Research", "C++ Systems", "Quantum"],
+  },
+
+  // Slugs of case studies featured on the homepage and top of /projects
+  featuredSlugs: [
+    "acoustic-horizons",
+    "boostfex",
+    "nlp-bert-models-depression-detection",
+    "stream-and-batch-processing-of-tweets-with-apache-kafka-and-spark",
+  ],
+
   hero: {
     greeting: "Hello World! I'm Rohan.",
     paragraphs: [

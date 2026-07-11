@@ -14,13 +14,16 @@ type Props = {
   paragraphs: string[];
   imageSrc: string;
   imageAlt: string;
+  oneLiner?: string;
+  chips?: string[];
+  ctas?: { label: string; href: string; external?: boolean; primary?: boolean }[];
 };
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
 }
 
-export default function Hero({ greeting, paragraphs, imageSrc, imageAlt }: Props) {
+export default function Hero({ greeting, paragraphs, imageSrc, imageAlt, oneLiner, chips, ctas }: Props) {
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
   const p1 = useTransform(scrollY, [0, 800], [0, -48]);
@@ -81,6 +84,35 @@ export default function Hero({ greeting, paragraphs, imageSrc, imageAlt }: Props
             {greeting}
           </motion.h1>
 
+          {oneLiner ? (
+            <motion.p
+              initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionTokens.duration.base, ease: motionTokens.ease, delay: 0.05 }}
+              className="mt-3 text-pretty text-lg font-medium text-slate-800 dark:text-slate-200"
+            >
+              {oneLiner}
+            </motion.p>
+          ) : null}
+
+          {chips?.length ? (
+            <motion.div
+              initial={reduce ? { opacity: 1 } : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: motionTokens.duration.base, ease: motionTokens.ease, delay: 0.1 }}
+              className="mt-4 flex flex-wrap gap-2"
+            >
+              {chips.map((c) => (
+                <span
+                  key={c}
+                  className="rounded-full border border-slate-200/70 bg-white/60 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/40 dark:text-slate-200"
+                >
+                  {c}
+                </span>
+              ))}
+            </motion.div>
+          ) : null}
+
           <div className="mt-6 space-y-4">
             {paragraphs.map((p, i) => (
               <motion.p
@@ -94,6 +126,42 @@ export default function Hero({ greeting, paragraphs, imageSrc, imageAlt }: Props
               </motion.p>
             ))}
           </div>
+
+          {ctas?.length ? (
+            <motion.div
+              initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionTokens.duration.base, ease: motionTokens.ease, delay: 0.2 }}
+              className="mt-7 flex flex-wrap items-center gap-3"
+            >
+              {ctas.map((cta) =>
+                cta.href === '#ask-ai' ? (
+                  <button
+                    key={cta.label}
+                    type="button"
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-ask-ai'))}
+                    className="group relative overflow-hidden rounded-full bg-gradient-to-r from-sky-500 via-violet-500 to-emerald-500 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:opacity-95"
+                  >
+                    ✦ {cta.label}
+                  </button>
+                ) : (
+                  <a
+                    key={cta.label}
+                    href={cta.href}
+                    target={cta.external ? '_blank' : undefined}
+                    rel={cta.external ? 'noreferrer' : undefined}
+                    className={
+                      cta.primary
+                        ? 'rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white'
+                        : 'rounded-full border border-slate-200/70 bg-white/60 px-5 py-2.5 text-sm font-semibold text-slate-800 backdrop-blur transition hover:bg-white dark:border-slate-800/70 dark:bg-slate-950/40 dark:text-slate-100 dark:hover:bg-slate-950/70'
+                    }
+                  >
+                    {cta.label}
+                  </a>
+                )
+              )}
+            </motion.div>
+          ) : null}
         </div>
 
         <motion.div

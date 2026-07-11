@@ -4,9 +4,28 @@ import Nav from '../components/Nav.astro';
 import { profile } from '../lib/constants/profile';
 import CursorGlow from '../components/CursorGlow';
 import ScrollToTop from '../components/ScrollToTop';
+import ChatWidget from '../components/ChatWidget';
 import { ViewTransitions } from 'astro:transitions';
 
 const { title, description } = Astro.props;
+const metaDescription =
+  description && description !== 'Personal portfolio'
+    ? description
+    : `${profile.name} — ${profile.heroV2.oneLiner}. ${profile.brandTagline}.`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(profile.hero.heroImage.src, Astro.site);
+const personJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: Astro.site?.toString(),
+  image: ogImage.toString(),
+  jobTitle: profile.role,
+  description: profile.heroV2.oneLiner,
+  email: `mailto:${profile.contactEmail}`,
+  sameAs: [profile.links.github, profile.links.linkedin],
+  alumniOf: profile.education.map((e) => ({ '@type': 'EducationalOrganization', name: e.school })),
+});
 ---
 <!doctype html>
 <html lang="en" class="noise grid-overlay scroll-smooth">
@@ -109,7 +128,23 @@ const { title, description } = Astro.props;
 
     <ViewTransitions />
     <title>{title}</title>
-    {description ? <meta name="description" content={description} /> : null}
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonical} />
+    <meta name="author" content={profile.name} />
+
+    <!-- OpenGraph / Twitter cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={personJsonLd} />
     <meta name="theme-color" content="#ffffff" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -129,6 +164,7 @@ const { title, description } = Astro.props;
     <Nav />
     <CursorGlow client:load />
     <ScrollToTop client:load />
+    <ChatWidget client:idle />
     <main transition:name="main" id="content" class="relative z-10 mx-auto max-w-6xl px-4 pt-16 sm:pt-20 pb-16">
       <slot />
     </main>

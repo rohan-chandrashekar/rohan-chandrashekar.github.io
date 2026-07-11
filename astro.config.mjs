@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 // For GitHub Pages:
 // 1) set site to https://<YOUR_GITHUB_USERNAME>.github.io
@@ -13,6 +14,7 @@ export default defineConfig({
   site,
   base,
   integrations: [
+    sitemap(),
     react(),
     tailwind({
       applyBaseStyles: false,

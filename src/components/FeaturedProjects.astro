@@ -1,0 +1,63 @@
+---
+import MotionReveal from './MotionReveal';
+import { profile } from '../lib/constants/profile';
+
+const featured = profile.featuredSlugs
+  .map((slug) => profile.caseStudies.find((c) => c.slug === slug))
+  .filter(Boolean);
+---
+
+<section class="mt-10">
+  <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <h2 class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50">
+        Featured work
+      </h2>
+      <p class="mt-2 max-w-2xl text-slate-700 dark:text-slate-300">
+        The four projects that best show what I build — each with a full case study.
+      </p>
+    </div>
+    <a
+      class="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 underline decoration-slate-300 underline-offset-4 hover:decoration-slate-500 dark:text-slate-100 dark:decoration-slate-700 dark:hover:decoration-slate-500"
+      href="/projects/"
+    >
+      All projects
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <div class="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
+    {featured.map((c, i) => (
+      <MotionReveal client:load delay={i * 0.05}>
+        <a
+          href={`/projects/${c.slug}/`}
+          class="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200/70 bg-white/60 shadow-[0_18px_45px_rgba(16,24,40,0.06)] backdrop-blur transition hover:shadow-soft dark:border-slate-800/60 dark:bg-slate-950/35"
+          data-spotlight
+        >
+          <div class="relative aspect-[2/1] overflow-hidden border-b border-slate-200/60 dark:border-slate-800/70">
+            <img
+              src={c.cover.src}
+              alt={c.cover.alt}
+              loading="lazy"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            />
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <h3 class="text-lg font-semibold tracking-tight text-slate-950 dark:text-slate-50">{c.title}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300 line-clamp-2">{c.highlight}</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {c.tags.slice(0, 3).map((t) => (
+                <span class="rounded-full border border-slate-200/70 bg-white/70 px-2 py-0.5 text-[11px] font-semibold text-slate-700 dark:border-slate-800/60 dark:bg-slate-950/40 dark:text-slate-200">
+                  {t}
+                </span>
+              ))}
+            </div>
+            <div class="mt-auto pt-4 text-sm font-semibold text-slate-900 dark:text-slate-100">
+              Read the case study <span aria-hidden="true" class="transition group-hover:translate-x-0.5 inline-block">→</span>
+            </div>
+          </div>
+        </a>
+      </MotionReveal>
+    ))}
+  </div>
+</section>

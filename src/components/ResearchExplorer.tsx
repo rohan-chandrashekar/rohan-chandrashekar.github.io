@@ -46,6 +46,43 @@ function inferTags(title: string) {
   return tags.length ? tags : ['Research'];
 }
 
+function bibtexFor(item: Item) {
+  const year = (item.meta || []).join(' ').match(/20\d{2}/)?.[0] ?? '2024';
+  const venue = (item.meta && item.meta[0]) || 'Portfolio publication';
+  const key =
+    'chandrashekar' +
+    year +
+    (item.title.split(/\s+/).find((w) => w.length > 3) || 'work').toLowerCase().replace(/[^a-z]/g, '');
+  return `@misc{${key},
+  author = {Chandrashekar, Rohan},
+  title = {${item.title}},
+  year = {${year}},
+  howpublished = {${venue}},
+  url = {${item.link}}
+}`;
+}
+
+function CopyBibtex({ item }: { item: Item }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigator.clipboard?.writeText(bibtexFor(item)).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
+        });
+      }}
+      className="rounded-full border border-slate-200/70 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-slate-700 transition hover:bg-white dark:border-slate-800/70 dark:bg-slate-950/40 dark:text-slate-200 dark:hover:bg-slate-950/70"
+      aria-label={`Copy BibTeX citation for ${item.title}`}
+    >
+      {copied ? 'Copied ✓' : 'Copy BibTeX'}
+    </button>
+  );
+}
+
 export default function ResearchExplorer({ items }: Props) {
   const reduce = useReducedMotion();
   const [q, setQ] = useState('');
@@ -109,7 +146,10 @@ export default function ResearchExplorer({ items }: Props) {
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{r.cta}</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">Open →</div>
+                <div className="flex items-center gap-2">
+                  <CopyBibtex item={r} />
+                  <div className="text-xs text-slate-500 dark:text-slate-400">Open →</div>
+                </div>
               </div>
 
               <div className="mt-2 text-xl font-semibold text-slate-950 dark:text-slate-50">{r.title}</div>
