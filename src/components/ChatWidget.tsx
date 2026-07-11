@@ -63,6 +63,78 @@ async function askLLM(history: Msg[], question: string): Promise<string> {
   return text.trim();
 }
 
+// Minimal markdown renderer for assistant replies (bold, inline code, links,
+// bullets, headings) — built with React elements, no raw HTML injection.
+function renderInline(text: string, keyPrefix: string): React.ReactNode[] {
+  const out: React.ReactNode[] = [];
+  // Tokenize **bold**, `code`, and [label](url)
+  const re = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\((?:https?:\/\/|\/)[^)]+\))/g;
+  let last = 0;
+  let i = 0;
+  for (const m of text.matchAll(re)) {
+    const idx = m.index ?? 0;
+    if (idx > last) out.push(text.slice(last, idx));
+    const tok = m[0];
+    if (tok.startsWith('**')) {
+      out.push(<strong key={`${keyPrefix}-b${i}`}>{tok.slice(2, -2)}</strong>);
+    } else if (tok.startsWith('`')) {
+      out.push(
+        <code key={`${keyPrefix}-c${i}`} className="rounded bg-slate-200/70 px-1 py-0.5 text-[0.85em] dark:bg-slate-800">
+          {tok.slice(1, -1)}
+        </code>
+      );
+    } else {
+      const label = tok.slice(1, tok.indexOf(']'));
+      const href = tok.slice(tok.indexOf('](') + 2, -1);
+      const external = href.startsWith('http');
+      out.push(
+        <a
+          key={`${keyPrefix}-a${i}`}
+          href={href}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noreferrer' : undefined}
+          className="font-semibold underline underline-offset-2"
+        >
+          {label}
+        </a>
+      );
+    }
+    last = idx + tok.length;
+    i++;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
+
+function FormattedText({ text }: { text: string }) {
+  const lines = text.split('\n');
+  return (
+    <div className="space-y-1">
+      {lines.map((line, i) => {
+        const bullet = line.match(/^\s*[-*•]\s+(.*)$/);
+        const heading = line.match(/^\s*#{1,4}\s+(.*)$/);
+        if (bullet) {
+          return (
+            <div key={i} className="flex gap-1.5 pl-1">
+              <span aria-hidden>•</span>
+              <span>{renderInline(bullet[1], `l${i}`)}</span>
+            </div>
+          );
+        }
+        if (heading) {
+          return (
+            <div key={i} className="font-semibold">
+              {renderInline(heading[1], `l${i}`)}
+            </div>
+          );
+        }
+        if (line.trim() === '') return <div key={i} className="h-1" />;
+        return <div key={i}>{renderInline(line, `l${i}`)}</div>;
+      })}
+    </div>
+  );
+}
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([]);
@@ -167,7 +239,7 @@ export default function ChatWidget() {
                       : 'max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-bl-md border border-slate-200/70 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-800 dark:border-slate-800/70 dark:bg-slate-900/60 dark:text-slate-100'
                   }
                 >
-                  {m.text}
+                  {m.role === 'assistant' ? <FormattedText text={m.text} /> : m.text}
                   {m.local ? (
                     <div className="mt-1.5 text-[10px] uppercase tracking-wide opacity-60">from site knowledge base</div>
                   ) : null}
