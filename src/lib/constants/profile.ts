@@ -52,7 +52,7 @@ export const profile = {
       "April 2025: 🎓 Completed the MIT xPRO Quantum Computing Fundamentals Program ⚛️ — strengthening my foundation in quantum algorithms and applications 🚀",
       "October 2024: 🏅 Awarded the Youth For Seva (YFS) Mitra Award for community volunteering ❤️",
       "September 2024: 💼 Joined Hewlett Packard Enterprise (HPE) as a Technical Solutions Consultant (Cybersecurity) 🔐",
-      "July 2024: 🌟 Recognized as the Best New Joinee at Hewlett Packard Enterprise (HPE) 🏆",
+      "July 2024: 🌟 Recognized as the Best New Joiner (among 400+ peers) at Hewlett Packard Enterprise (HPE) 🏆",
       "February 2024: 🚀 Started my internship at Hewlett Packard Enterprise (HPE) — Cybersecurity / AppSec 🔍",
       "December 2023: ✍️ Presented my research paper “Mental Health in the Digital Era — NLP Models for Depression and Suicidal Tendency Detection” 🧠💡 at the Fifth International Conference on Computing and Network Communications (CoCoNet 2023)",
       "December 2023: ⚡ Delivered a lightning talk on “Emerging Trends in Quantum Computing and Cryptography” 🧑‍💻🔐 at the Fifth International Conference on Computing and Network Communications (CoCoNet 2023)",
@@ -73,8 +73,12 @@ export const profile = {
       start: "Sep 2024",
       end: "May 2025",
       highlights: [
-        "Working full-time with HPE’s SQuest framework (built on Red Hat Ansible Automation Platform).",
-        "Focus: AI for Cybersecurity and Automation.",
+        "Built and delivered a customer PoC for AI-enabled email Data Loss Prevention on the NVIDIA Morpheus pipeline — Kafka ingestion, Morpheus pre/post-processing, and Triton-served Llama 2 inference, visualized in a custom web UI (team of 2, lead).",
+        "Developed a Sensitive Information Detection workflow with a fine-tuned BERT Mini model — MLDM data pipelines, MLDE training and model registry, Triton/KServe serving, Kafka streaming, and Splunk integration, with a continual-learning loop.",
+        "Stood up the full platform end-to-end on HPE DL380a-class GPU servers: Ubuntu, RKE2 Kubernetes, Rook Ceph, MetalLB, NVIDIA GPU Operator, and KServe — deployed via Ansible AWX workflow templates and managed as Helm releases.",
+        "Sole author of all 30+ Ansible AWX playbooks for HPE's SQuest Everything-as-a-Service accelerator — SBOM generation, vulnerability scanning, OWASP Nettacker integration, and deployment automation — collaborating with the France team via code reviews.",
+        "Served on the frontline response team securing company assets and firewalls during the July 2024 CrowdStrike outage.",
+        "Recognized as Best New Joiner among 400+ peers.",
       ],
     },
     {
@@ -85,8 +89,10 @@ export const profile = {
       start: "Feb 2024",
       end: "Aug 2024",
       highlights: [
-        "Explored AI for cybersecurity and BurpSuite for Web LLM attacks.",
-        "Built a chatbot use case to summarize cybersecurity documents and mapped controls to NIST.",
+        "Built a firewall configuration migration tool (Python regex parsers + web UI) covering 5 vendors — Cisco, Palo Alto, Fortinet, Check Point, Juniper — estimated by senior network engineers to cut manual migration effort by ~50%; adopted by engineers after handoff.",
+        "Built an SBOM generation + vulnerability-scanning pipeline and OWASP Nettacker VAPT automation, later incorporated into HPE's SQuest accelerator.",
+        "Researched Web LLM attack surfaces with Burp Suite and prototyped a chatbot for summarizing cybersecurity documents, mapping controls to NIST frameworks.",
+        "Authored 2 award-winning internal technical white papers (HPE Parasparam 2024) on securing LLMs and container runtime security.",
       ],
     },
     {
@@ -96,7 +102,9 @@ export const profile = {
       team: "Cybersecurity",
       start: "Jan 2024",
       end: "Feb 2024",
-      highlights: [],
+      highlights: [
+        "Built a retrieval-augmented QA system over a large corpus of cybersecurity documentation using an Ollama-served LLM with a Pinecone vector database — reducing manual search time by ~40% per engineer feedback.",
+      ],
     },
   ],
 
@@ -174,7 +182,7 @@ export const profile = {
         "Gradient-Boosted Federated Learning to flag anomalous bank transactions while preserving data locality—designed for reproducible training and evaluation across distributed clients.",
       tags: ["Federated Learning", "Anomaly Detection", "Finance"],
       meta: [
-        "Submitted for publication in IEEE Access — under review",
+        "Resubmitted to IEEE Access — under review",
       ],
       link: "https://github.com/rohan-chandrashekar/BoostFex",
       cta: "Journal Article Submitted - IEEE Access",
@@ -290,7 +298,7 @@ export const profile = {
     ],
     badges: [
       { title: "Best Paper Award", detail: "IEEE MRTM International Conference 2023 (PyEdit Pro)" },
-      { title: "Best New Joinee", detail: "HPE Parasparam 2024" },
+      { title: "Best New Joiner", detail: "HPE — among 400+ peers (2024)" },
       { title: "Youth For Seva Mitra Award", detail: "Volunteering recognition (Sep 2024)" },
       { title: "ISO 27001: Lead Auditor", detail: "Certified training completed" },
       { title: "MIT xPRO – Quantum Computing Fundamentals", detail: "Quantum Computing Fundamentals Program" },
@@ -326,7 +334,7 @@ export const profile = {
           "Embedded Systems",
           "Human‑Computer Interaction",
         ],
-      highlight: "Assistive navigation headset prototype (patent under consideration).",
+      highlight: "Assistive navigation headset prototype (patent pending).",
       cover: { src: "https://opengraph.githubassets.com/514b9d2941eb27f6cfba8810587ded354da79c71/rohan-chandrashekar/Acoustic-Horizons", alt: "Acoustic Horizons" },
       sections: {
         overview:
@@ -336,7 +344,7 @@ export const profile = {
         approach:
           "Designed the headset interaction model around bone‑conduction for “hear the world + hear the cue” feedback.\nIntegrated ESP‑32 camera modules as the sensing layer and documented the full system architecture, data flow, and user‑first design constraints.\nFocused on ergonomics, cue clarity, and failure‑safe behavior for real‑world use.",
         impact:
-          "Delivered a working prototype with an end‑to‑end story: design → integration → validation. Positioned as a real assistive tech candidate; currently under patent consideration, with public artifacts optimized for reviewer confidence.",
+          "Delivered a working prototype with an end‑to‑end story: design → integration → validation. Positioned as a real assistive tech candidate; currently patent-pending, with public artifacts optimized for reviewer confidence.",
         stack: [
           "C++",
           "Python",
