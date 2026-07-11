@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { motionTokens } from '../lib/motion';
+import { useReveal } from '../lib/useReveal';
 
 type Props = {
   value: number;
@@ -11,6 +12,7 @@ type Props = {
 
 export default function StatsCounter({ value, suffix = '', label, sublabel }: Props) {
   const reduce = useReducedMotion();
+  const { ref: revealRef, hidden } = useReveal({ amount: 0.4 });
   const [v, setV] = useState(reduce ? value : 0);
 
   const formatter = useMemo(() => new Intl.NumberFormat(undefined), []);
@@ -35,12 +37,13 @@ export default function StatsCounter({ value, suffix = '', label, sublabel }: Pr
 
   return (
     <motion.div
-      initial={reduce ? { opacity: 1 } : { opacity: 0, y: 10 }}
-      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
+      ref={revealRef}
+      initial={false}
+      animate={hidden ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
       transition={{ duration: motionTokens.duration.fast, ease: motionTokens.ease }}
       className="stat-tile"
       data-spotlight
+      suppressHydrationWarning
     >
       <div className="text-3xl sm:text-4xl font-display font-semibold tracking-tight text-slate-950 dark:text-slate-50">
         {formatter.format(v)}

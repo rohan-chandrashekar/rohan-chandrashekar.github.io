@@ -1,14 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import MotionReveal from './MotionReveal';
-import { motion, useReducedMotion } from 'framer-motion';
-import { motionTokens } from '../lib/motion';
 
 type Props = {
   email: string;
 };
 
 export default function ContactSection({ email }: Props) {
-  const reduce = useReducedMotion();
   const [name, setName] = useState('');
   const [from, setFrom] = useState('');
   const [message, setMessage] = useState('');
@@ -45,11 +42,8 @@ export default function ContactSection({ email }: Props) {
 
             <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
               {/* Left: message */}
-              <motion.div
-                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 10 }}
-                whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: motionTokens.duration.base, ease: motionTokens.ease }}
+              <MotionReveal
+                y={10}
                 className="rounded-3xl border border-slate-200/70 bg-white/60 p-5 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/30"
               >
                 <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-200">
@@ -73,17 +67,11 @@ export default function ContactSection({ email }: Props) {
                     <span>Talks, mentoring, and community work</span>
                   </li>
                 </ul>
-              </motion.div>
+              </MotionReveal>
 
               {/* Right: form */}
-              <motion.form
-                onSubmit={onSubmit}
-                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 10 }}
-                whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: motionTokens.duration.base, ease: motionTokens.ease, delay: 0.05 }}
-                className="grid grid-cols-1 gap-4"
-              >
+              <MotionReveal y={10} delay={0.05}>
+              <form onSubmit={onSubmit} className="grid grid-cols-1 gap-4">
                 <label className="grid gap-2">
                   <span className="text-xs font-semibold tracking-wide text-slate-700 dark:text-slate-300">
                     Your name
@@ -132,7 +120,8 @@ export default function ContactSection({ email }: Props) {
                     <span className="absolute inset-0 opacity-0 transition group-hover:opacity-100 luxe-gradient" />
                   </button>
                 </div>
-              </motion.form>
+              </form>
+              </MotionReveal>
             </div>
           </div>
         </MotionReveal>

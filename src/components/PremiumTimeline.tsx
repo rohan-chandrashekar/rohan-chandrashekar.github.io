@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
+import MotionReveal from './MotionReveal';
 
 type TimelineItem = {
   title: string;
@@ -43,14 +44,7 @@ export default function PremiumTimeline({ items, compact = false }: Props) {
 
       <div className={compact ? 'space-y-4 pl-10' : 'space-y-6 pl-10'}>
         {items.map((it, idx) => (
-          <motion.div
-            key={`${it.title}-${idx}`}
-            className="relative"
-            initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-            whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.55, ease: 'easeOut', delay: idx * 0.03 }}
-          >
+          <MotionReveal key={`${it.title}-${idx}`} className="relative" delay={idx * 0.03}>
             {/* dot */}
             <div className="absolute left-[-30px] top-[10px]">
               <div className="relative">
@@ -107,7 +101,7 @@ export default function PremiumTimeline({ items, compact = false }: Props) {
                 </ul>
               ) : null}
             </div>
-          </motion.div>
+          </MotionReveal>
         ))}
       </div>
     </div>

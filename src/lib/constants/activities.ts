@@ -51,7 +51,7 @@ const volunteeringDates: Record<string, string> = {
   "Youth For Seva (YFS) - NMMS Teaching Volunteer": "2023-11-01",
   "U&I Trust - Spoken English Teaching Volunteer": "2023-08-01",
   "U&I Trust Pan-India Fundraiser Leader Volunteer": "2023-09-01",
-  "Hewlett Packard Enterprise (HPE) Coporate Social Responsibiliy (CSR) Activities": "2024-06-15",
+  "Hewlett Packard Enterprise (HPE) Corporate Social Responsibility (CSR) Activities": "2024-06-15",
   "Youth For Seva (YFS) Mitra Award Recipient": "2024-09-29",
 };
 
@@ -74,7 +74,7 @@ const volunteeringLocations: Record<string, string> = {
   "Youth For Seva (YFS) - NMMS Teaching Volunteer": "Bengaluru, India",
   "U&I Trust - Spoken English Teaching Volunteer": "Bengaluru, India",
   "U&I Trust Pan-India Fundraiser Leader Volunteer": "Bengaluru, India",
-  "Hewlett Packard Enterprise (HPE) Coporate Social Responsibiliy (CSR) Activities": "Bengaluru, India",
+  "Hewlett Packard Enterprise (HPE) Corporate Social Responsibility (CSR) Activities": "Bengaluru, India",
   "Youth For Seva (YFS) Mitra Award Recipient": "Bengaluru, India",
 };
 

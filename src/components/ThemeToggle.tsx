@@ -34,8 +34,11 @@ export default function ThemeToggle() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLButtonElement | null>(null);
 
-  const [pref, setPref] = useState<ThemePref>(() => (typeof window === 'undefined' ? 'system' : readPref()));
-  const [resolved, setResolved] = useState<ThemeResolved>(() => (typeof window === 'undefined' ? 'light' : resolve(readPref())));
+  // Start from fixed values so server and client render identical markup;
+  // the effect below syncs to the real preference right after hydration.
+  const [pref, setPref] = useState<ThemePref>('system');
+  const [resolved, setResolved] = useState<ThemeResolved>('light');
+  const [mounted, setMounted] = useState(false);
 
   // magnetic micro-move
   const rawX = useMotionValue(0);
@@ -45,6 +48,7 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    setMounted(true);
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
 
     const sync = () => {
@@ -101,8 +105,10 @@ export default function ThemeToggle() {
     rawY.set(0);
   };
 
-  const label =
-    pref === 'system'
+  // Keep the label stable until after hydration to avoid a server/client mismatch.
+  const label = !mounted
+    ? 'Theme'
+    : pref === 'system'
       ? `Theme: System (${resolved})`
       : `Theme: ${pref.charAt(0).toUpperCase() + pref.slice(1)}`;
 

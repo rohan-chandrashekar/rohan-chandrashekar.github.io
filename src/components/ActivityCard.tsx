@@ -1,27 +1,27 @@
 import React, { useMemo, useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import type { Activity } from "../lib/constants/activities";
 import SmoothSlideshow from "./SmoothSlideshow";
+import { useReveal } from "../lib/useReveal";
 
 export default function ActivityCard({ activity }: { activity: Activity }) {
-  const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { margin: "-20% 0px -55% 0px", amount: 0.35 });
+  const { ref: revealRef, hidden } = useReveal<HTMLElement>();
 
   const ease = [0.22, 1, 0.36, 1] as const;
   const year = useMemo(() => activity.date?.slice(0, 4) || "", [activity.date]);
 
   return (
     <motion.article
-      ref={ref}
-      initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px -25% 0px" }}
+      ref={revealRef as any}
+      initial={false}
+      animate={hidden ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease }}
       className="card rounded-3xl overflow-hidden"
     >
       {/* Slightly larger photo column, still scan-friendly */}
-      <div className="grid md:grid-cols-[280px,1fr]">
+      <div ref={ref} className="grid md:grid-cols-[280px,1fr]">
         {/* Left: thumbnail slideshow */}
         <div className="relative border-b border-slate-200/60 dark:border-slate-800/70 md:border-b-0 md:border-r">
           <div className="p-3">

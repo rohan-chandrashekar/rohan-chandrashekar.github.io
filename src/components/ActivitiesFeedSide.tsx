@@ -1,20 +1,19 @@
 import React, { useMemo, useRef } from "react";
-import { motion, useInView, useReducedMotion, useScroll } from "framer-motion";
+import { motion, useReducedMotion, useScroll } from "framer-motion";
 import { activities, type Activity } from "../lib/constants/activities";
 import SmoothSlideshow from "./SmoothSlideshow";
+import { useReveal } from "../lib/useReveal";
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 function MediaPane({ activity }: { activity: Activity }) {
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { margin: "-18% 0px -55% 0px", amount: 0.35 });
-  const ease = [0.22, 1, 0.36, 1] as const;
+  const { ref, hidden } = useReveal();
 
   return (
     <motion.div
       ref={ref}
-      initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px -25% 0px" }}
+      initial={false}
+      animate={hidden ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease }}
       className="relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/60 shadow-sm backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/30"
     >
@@ -31,17 +30,13 @@ function MediaPane({ activity }: { activity: Activity }) {
 }
 
 function TextPane({ activity }: { activity: Activity }) {
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { margin: "-18% 0px -55% 0px", amount: 0.35 });
-  const ease = [0.22, 1, 0.36, 1] as const;
+  const { ref, hidden } = useReveal();
 
   return (
     <motion.div
       ref={ref}
-      initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px -25% 0px" }}
+      initial={false}
+      animate={hidden ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease }}
       className="card rounded-3xl p-3 md:p-4"
     >
@@ -105,6 +100,19 @@ function TextPane({ activity }: { activity: Activity }) {
   );
 }
 
+function Marker() {
+  const { ref, hidden } = useReveal();
+  return (
+    <motion.div
+      ref={ref}
+      initial={false}
+      animate={hidden ? { opacity: 0, scale: 0.9 } : { opacity: 1, scale: 1 }}
+      transition={{ duration: 0.45, ease }}
+      className="mt-4 h-4 w-4 rounded-full bg-slate-950 ring-8 ring-slate-950/10 dark:bg-slate-50 dark:ring-white/10"
+    />
+  );
+}
+
 export default function ActivitiesFeedSide() {
   const items = useMemo(() => activities, []);
   const reduce = useReducedMotion();
@@ -152,13 +160,7 @@ export default function ActivitiesFeedSide() {
                 {/* Middle marker */}
                 <div className="relative flex justify-center">
                   <div className="flex flex-col items-center">
-                    <motion.div
-                      initial={reduce ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: "-10% 0px -25% 0px" }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className="mt-4 h-4 w-4 rounded-full bg-slate-950 ring-8 ring-slate-950/10 dark:bg-slate-50 dark:ring-white/10"
-                    />
+                    <Marker />
                     <div className="mt-2 max-w-[12rem] text-center text-[11px] font-semibold text-slate-600 dark:text-slate-300">
                       {a.when}{a.location ? ` · ${a.location}` : ""}
                     </div>

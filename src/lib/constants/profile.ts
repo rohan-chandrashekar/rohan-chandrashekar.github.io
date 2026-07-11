@@ -124,7 +124,7 @@ export const profile = {
       tags: ["Python", "Tooling", "Software Engineering", "UX"],
       meta: [
         "Presented at IEEE International MRTM Conference - 2023 - Best Paper Award",
-        "Submitted and accepted for publication in IEEE Xplore (expected publication date: December 2024)",
+        "Accepted for publication in IEEE Xplore",
       ],
       link: "https://github.com/rohan-chandrashekar/ADVANCED-TEXT-EDITOR/blob/main/DOCUMENTS/PyEdit%20Pro%20-%20The%20Ultimate%20Advanced%20Text%20Editor%20in%20Python%20-%20Empowering%20Text%20Editing%20Experience.pdf",
       cta: "Research Paper Submitted - IEEE International MRTM Conference 2023",
@@ -147,7 +147,7 @@ export const profile = {
       tags: ["NLP", "Machine Learning", "Mental Health"],
       meta: [
         "Presented at 5th Conference for Communications and Networking (CoCoNet) - 2023",
-        "Submitted and accepted for publication in Springer Lecture Notes in Electrical Engineering (expected publication date: December 2024)",
+        "Accepted for publication in Springer Lecture Notes in Electrical Engineering",
       ],
       link: "https://github.com/rohan-chandrashekar/NLP-BERT-Models-Depression-Detection/blob/main/Research%20Paper.pdf",
       cta: "Research Paper Submitted - 5th Conference for Communications and Networking 2023",
@@ -158,8 +158,7 @@ export const profile = {
         "Gradient-Boosted Federated Learning to flag anomalous bank transactions while preserving data locality—designed for reproducible training and evaluation across distributed clients.",
       tags: ["Federated Learning", "Anomaly Detection", "Finance"],
       meta: [
-        "Submitted for publication in IEEE Access (Aug 2024)",
-        "Current status: Under Review",
+        "Submitted for publication in IEEE Access — under review",
       ],
       link: "https://github.com/rohan-chandrashekar/BoostFex",
       cta: "Journal Article Submitted - IEEE Access",
@@ -209,7 +208,7 @@ export const profile = {
         "Recognized by U&I for my leadership and contribution during the Annual Pan-India Crowdfunding Campaign, where we together could successfully raise Rupees 1.76 Crores (USD 210K) to fund essential programs for underprivileged children.",
     },
     {
-      org: "Hewlett Packard Enterprise (HPE) Coporate Social Responsibiliy (CSR) Activities",
+      org: "Hewlett Packard Enterprise (HPE) Corporate Social Responsibility (CSR) Activities",
       logo: "/images/org/hpe.svg",
       description: "",
     },
@@ -229,7 +228,7 @@ export const profile = {
                 "/images/activities/cern/1.JPEG",
                 "/images/activities/cern/2.JPEG",
                 "/images/activities/cern/3.JPEG",
-                "/images/activities/cern/3.JPEG",
+                "/images/activities/cern/4.JPEG",
 ],
     },
   ],

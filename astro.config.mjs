@@ -6,7 +6,7 @@ import tailwind from '@astrojs/tailwind';
 // 1) set site to https://<YOUR_GITHUB_USERNAME>.github.io
 // 2) set base to /<YOUR_REPO_NAME>
 // Astro needs this so links + assets work correctly on Pages.
-const site = process.env.SITE_URL || 'https://example.github.io';
+const site = process.env.SITE_URL || 'https://rohan-chandrashekar.github.io';
 const base = process.env.BASE_PATH || '/';
 
 export default defineConfig({

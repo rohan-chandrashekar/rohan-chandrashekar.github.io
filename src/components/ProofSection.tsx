@@ -2,6 +2,22 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import StatsCounter from './StatsCounter';
 import { motionTokens } from '../lib/motion';
+import { useReveal } from '../lib/useReveal';
+
+function StaggerGroup({
+  variants,
+  children,
+}: {
+  variants: any;
+  children: React.ReactNode;
+}) {
+  const { ref, hidden } = useReveal({ amount: 0.25 });
+  return (
+    <motion.div ref={ref} variants={variants} initial={false} animate={hidden ? 'hidden' : 'show'}>
+      {children}
+    </motion.div>
+  );
+}
 
 type Stat = { value: number; suffix?: string; label: string; sublabel?: string };
 type Proof = {
@@ -54,14 +70,14 @@ export default function ProofSection({ proof }: { proof: Proof }) {
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
+          <StaggerGroup variants={container}>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Awards & Credentials
             </div>
 
             <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {proof.badges.map((b) => (
-                <motion.div key={b.title} variants={item} className="mini-badge" data-spotlight>
+                <motion.div key={b.title} variants={item} className="mini-badge" data-spotlight suppressHydrationWarning>
                   <div className="font-medium text-slate-950 dark:text-slate-50">{b.title}</div>
                   {b.detail ? (
                     <div className="mt-1 text-xs text-slate-600 dark:text-slate-400">{b.detail}</div>
@@ -69,16 +85,16 @@ export default function ProofSection({ proof }: { proof: Proof }) {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </StaggerGroup>
 
-          <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
+          <StaggerGroup variants={container}>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Platforms & places
             </div>
 
             <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {proof.logos.map((l) => (
-  <motion.div key={l.name} variants={item} className="logo-pill" data-spotlight>
+  <motion.div key={l.name} variants={item} className="logo-pill" data-spotlight suppressHydrationWarning>
     <div className="flex items-center gap-2">
       {l.icon ? (
         <span className="h-8 w-8 sm:h-9 sm:w-9 shrink-0 rounded-md bg-white/70 dark:bg-white/10 ring-1 ring-slate-900/10 dark:ring-white/10 grid place-items-center overflow-hidden">
@@ -107,8 +123,8 @@ export default function ProofSection({ proof }: { proof: Proof }) {
 ))}
             </div>
 
-            
-          </motion.div>
+
+          </StaggerGroup>
         </div>
       </div>
     </section>
