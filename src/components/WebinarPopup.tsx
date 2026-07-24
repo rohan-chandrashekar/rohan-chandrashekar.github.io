@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 const EXPIRY = new Date('2026-07-30T00:00:00'); // gone from July 30 onward (day after +1)
 const REGISTER_URL =
   'https://www.influxdata.com/resources/building-agentic-f1-strategy-engine-with-influxdb3/';
-const BANNER_SRC = '/images/webinar-banner.png';
+const BANNER_SRC = '/images/webinar-banner.jpg';
 const SESSION_KEY = 'webinar-popup-dismissed';
 
 export default function WebinarPopup() {

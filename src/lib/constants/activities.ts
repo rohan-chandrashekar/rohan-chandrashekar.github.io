@@ -700,7 +700,7 @@ const influxWebinarActivity: Activity = {
   description:
     "Presenting PitWall-AI at an InfluxData webinar: how five cooperating AI agents (LangGraph, PyTorch, genetic algorithms, and an LLM race engineer) make per-lap F1 strategy decisions on top of InfluxDB 3 Core and a 32-panel Grafana dashboard.",
   location: "Online",
-  images: ["/images/projects/pitwall-ai.svg"],
+  images: ["/images/activities/influx-webinar.jpg", "/images/projects/pitwall-ai.svg"],
   links: [
     {
       label: "Register / Watch",
