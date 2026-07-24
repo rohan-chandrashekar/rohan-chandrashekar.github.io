@@ -720,7 +720,7 @@ const ecoPathHackathonActivity: Activity = {
   description:
     "Built ECOpath at a hackathon: a carbon-aware, multi-modal route planner comparing every way from A to B by carbon, time, and cost — a three-agent pipeline (routing, emissions, decision) with LLM reasoning grounded in EPA/IPCC/FTA datasets.",
   location: "Tempe, AZ",
-  images: ["/images/projects/ecopath.svg"],
+  images: ["/images/activities/ecopath/1.jpg", "/images/projects/ecopath.svg"],
   links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/EcoPath" }],
 };
 
