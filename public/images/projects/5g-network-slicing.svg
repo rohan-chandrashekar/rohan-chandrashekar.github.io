@@ -1,33 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <defs>
-    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#6df275"/>
-      <stop offset="0.55" stop-color="#67d3e5"/>
-      <stop offset="1" stop-color="#ca89f9"/>
-    </linearGradient>
-    <radialGradient id="r" cx="50%" cy="40%" r="80%">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="38"/>
-    </filter>
-  </defs>
-  <rect width="1600" height="900" fill="url(#g)"/>
-  <rect width="1600" height="900" fill="url(#r)"/>
-  <g filter="url(#blur)">
-    <circle cx="494" cy="124" r="186" fill="#ffffff" opacity="0.24"/>
-    <circle cx="729" cy="566" r="358" fill="#ffffff" opacity="0.25"/>
-    <circle cx="443" cy="298" r="273" fill="#ffffff" opacity="0.25"/>
-    <circle cx="503" cy="396" r="314" fill="#ffffff" opacity="0.18"/>
-    <circle cx="267" cy="265" r="225" fill="#ffffff" opacity="0.14"/>
-    <circle cx="1088" cy="82" r="181" fill="#ffffff" opacity="0.19"/>
-  </g>
-  <g opacity="0.42">
-    <path d="M-120 720 C 240 520, 520 980, 920 760 S 1580 620, 1760 820 L 1760 980 L -120 980 Z" fill="#0b1220"/>
-  </g>
-  <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" fill="#0b1220">
-    <text x="86" y="820" font-size="42" font-weight="700" opacity="0.92">{short}</text>
-    <text x="88" y="862" font-size="20" font-weight="600" opacity="0.65">Case study</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e1b4b"/></linearGradient>
+  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#a78bfa"/></marker>
+</defs>
+<rect width="800" height="550" fill="url(#bg)"/>
+<circle cx="700" cy="80" r="150" fill="#a78bfa" opacity="0.07"/>
+<circle cx="90" cy="480" r="120" fill="#a78bfa" opacity="0.07"/>
+<text x="48" y="62" font-family="'Space Grotesk',Inter,Arial" font-size="30" font-weight="700" fill="#f1f5f9">5G Network Slicing</text>
+<text x="48" y="92" font-family="Inter,Arial" font-size="17" fill="#94a3b8">Dynamic resource allocation simulation</text>
+<rect x="48" y="177" width="218.66666666666666" height="56" rx="14" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5" opacity="0.95"/><text x="157.33333333333331" y="211" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">eMBB slice</text><path d="M270.66666666666663 205 L284.66666666666663 205" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#arr)"/><rect x="290.66666666666663" y="177" width="218.66666666666666" height="56" rx="14" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5" opacity="0.95"/><text x="399.99999999999994" y="211" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">mMTC slice</text><path d="M513.3333333333333 205 L527.3333333333333 205" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#arr)"/><rect x="533.3333333333333" y="177" width="218.66666666666666" height="56" rx="14" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5" opacity="0.95"/><text x="642.6666666666666" y="211" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">URLLC slice</text><path d="M400 235 L400 258" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#arr)" opacity="0.8"/><rect x="48" y="262" width="704" height="56" rx="14" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5" opacity="0.95"/><text x="400" y="286" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">Slice Orchestrator</text><text x="400" y="306" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">dynamic allocation</text><path d="M400 320 L400 343" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#arr)" opacity="0.8"/><rect x="48" y="347" width="218.66666666666666" height="56" rx="14" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5" opacity="0.95"/><text x="157.33333333333331" y="381" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">Base Stations</text><path d="M270.66666666666663 375 L284.66666666666663 375" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#arr)"/><rect x="290.66666666666663" y="347" width="218.66666666666666" height="56" rx="14" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5" opacity="0.95"/><text x="399.99999999999994" y="381" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">Clients</text><path d="M513.3333333333333 375 L527.3333333333333 375" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#arr)"/><rect x="533.3333333333333" y="347" width="218.66666666666666" height="56" rx="14" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5" opacity="0.95"/><text x="642.6666666666666" y="371" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">Metrics</text><text x="642.6666666666666" y="391" text-anchor="middle" font-family="Inter,Arial" font-size="17" font-weight="600" fill="#e2e8f0">per-slice QoS</text>
 </svg>

@@ -690,7 +690,43 @@ const linkedInPostActivities: Activity[] = [
   }
 ];
 
+const influxWebinarActivity: Activity = {
+  id: "influx-webinar-pitwall-2026",
+  date: "2026-07-28",
+  when: fmtMonthYear("2026-07-28"),
+  category: "Research",
+  title: "InfluxData Webinar — Building an Agentic F1 Strategy Engine with InfluxDB 3",
+  subtitle: "Speaker · July 28, 2026 · 8AM PT / 4PM BST",
+  description:
+    "Presenting PitWall-AI at an InfluxData webinar: how five cooperating AI agents (LangGraph, PyTorch, genetic algorithms, and an LLM race engineer) make per-lap F1 strategy decisions on top of InfluxDB 3 Core and a 32-panel Grafana dashboard.",
+  location: "Online",
+  images: ["/images/projects/pitwall-ai.svg"],
+  links: [
+    {
+      label: "Register / Watch",
+      href: "https://www.influxdata.com/resources/building-agentic-f1-strategy-engine-with-influxdb3/",
+    },
+    { label: "PitWall-AI on GitHub", href: "https://github.com/rohan-chandrashekar/Pitwall-AI" },
+  ],
+};
+
+const ecoPathHackathonActivity: Activity = {
+  id: "ecopath-hackathon-2026",
+  date: "2026-04-15",
+  when: fmtMonthYear("2026-04-15"),
+  category: "Education",
+  title: "Hackathon — ECOpath, Carbon-Aware Agentic Route Planner",
+  subtitle: "Agentic AI · Sustainability · Full-stack",
+  description:
+    "Built ECOpath at a hackathon: a carbon-aware, multi-modal route planner comparing every way from A to B by carbon, time, and cost — a three-agent pipeline (routing, emissions, decision) with LLM reasoning grounded in EPA/IPCC/FTA datasets.",
+  location: "Tempe, AZ",
+  images: ["/images/projects/ecopath.svg"],
+  links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/EcoPath" }],
+};
+
 export const activities: Activity[] = [
+  influxWebinarActivity,
+  ecoPathHackathonActivity,
   asuActivity,
   ...linkedInPostActivities,
   // Keep the CERN trip entry as-is

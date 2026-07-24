@@ -25,10 +25,10 @@ export const profile = {
 
   // Slugs of case studies featured on the homepage and top of /projects
   featuredSlugs: [
-    "acoustic-horizons",
-    "boostfex",
-    "nlp-bert-models-depression-detection",
-    "stream-and-batch-processing-of-tweets-with-apache-kafka-and-spark",
+    "go-sluice-telemetry",
+    "5g-network-slicing",
+    "pitwall-ai",
+    "kubemedic",
   ],
 
   hero: {
@@ -48,6 +48,8 @@ export const profile = {
     title: "A glimpse into my journey: Capturing milestones and experiences",
     subtitle: "Highlights:",
     highlights: [
+      "July 2026: 🎙️ Presenting the InfluxData webinar “Building an Agentic F1 Strategy Engine with InfluxDB 3” — showcasing PitWall-AI 🏎️",
+      "April 2026: 🌱 Built ECOpath, a carbon-aware agentic route planner, at a hackathon 🏁",
       "January 2026: 🎓 Started my Master of Science in Computer Science (MSCS) at Arizona State University (ASU) — Tempe, Arizona, USA 🇺🇸",
       "April 2025: 🎓 Completed the MIT xPRO Quantum Computing Fundamentals Program ⚛️ — strengthening my foundation in quantum algorithms and applications 🚀",
       "October 2024: 🏅 Awarded the Youth For Seva (YFS) Mitra Award for community volunteering ❤️",
@@ -233,7 +235,7 @@ export const profile = {
     },
     {
       org: "Hewlett Packard Enterprise (HPE) Corporate Social Responsibility (CSR) Activities",
-      logo: "/images/org/hpe.svg",
+      logo: "/images/org/hpe.png",
       description: "",
     },
   ],
@@ -322,6 +324,193 @@ export const profile = {
 
   // Case-study-first projects (this is what makes the site stand out)
   caseStudies: [
+    {
+      slug: "go-sluice-telemetry",
+      title: "Sluice",
+      subtitle:
+        "High-throughput telemetry ingestion pipeline in Go — gRPC gateway, Kafka, Redis dedup, TimescaleDB, load-tested to its real ceilings.",
+      when: "2026 · Personal project",
+      tags: ["Go", "Kafka", "Distributed Systems", "Observability"],
+      highlight: "Effectively-once telemetry ingestion with measured backpressure ceilings.",
+      cover: { src: "/images/projects/sluice.svg", alt: "Sluice architecture diagram" },
+      sections: {
+        overview:
+          "A production-shaped telemetry ingestion path: a gRPC ingest gateway with a bounded worker pool, partitioned idempotent Kafka, a consumer group with Redis dedup and a batched TimescaleDB sink, a dead-letter topic for poison records, Prometheus/Grafana observability, and a Kubernetes deployment path via Helm, Terraform, and Ansible.",
+        problem:
+          "An ingestion path has one job that's easy to say and hard to keep true under load: don't lose data, and know exactly how much load you can take before you do. Most demo pipelines skip the backpressure story or never measure their own ceiling on real hardware.",
+        approach:
+          "Three architectural bets: bounded pool + blocking backpressure, batched writes to every downstream sink, and idempotent-producer + commit-after-write + dedup for effectively-once delivery.\nLoad-tested against real infrastructure to find genuine throughput ceilings — every number in the README comes from running the actual pipeline.\nBorn from operating Kafka streaming infrastructure at HPE: this is the ingestion path I had operated but never built.",
+        impact:
+          "Demonstrates real distributed-systems engineering: durability guarantees, backpressure, dead-lettering, and honest capacity measurement — the operations instincts of production streaming infra, built from scratch.",
+        stack: ["Go", "gRPC", "Kafka", "Redis", "TimescaleDB", "Prometheus", "Grafana", "Helm", "Terraform", "Ansible"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/Go-Sluice-Telemetry" }],
+    },
+
+    {
+      slug: "pitwall-ai",
+      title: "PitWall-AI",
+      subtitle:
+        "Agentic F1 race-strategy engine — five cooperating agents (LangGraph) making per-lap pit decisions with PyTorch tire models, genetic algorithms, and an LLM race engineer.",
+      when: "2026 · Personal project",
+      tags: ["Agentic AI", "LangGraph", "PyTorch", "Time Series"],
+      highlight: "Five-agent pipeline: telemetry → rival prediction → GA strategy → ghost-car scoring → LLM briefings.",
+      cover: { src: "/images/projects/pitwall-ai.svg", alt: "PitWall-AI architecture diagram" },
+      sections: {
+        overview:
+          "An end-to-end Formula 1 race-strategy simulator that makes per-lap pit-stop and compound decisions with the reasoning of a real pitwall — fully automated. Replay any 2023–2025 race at up to 1000× speed, or point it at a live Grand Prix.",
+        problem:
+          "Race strategy is a multi-agent reasoning problem under uncertainty: live telemetry, rival behavior prediction, combinatorial strategy search, and clear communication — all per lap, in real time.",
+        approach:
+          "Scout ingests live telemetry from the OpenF1 API; Spy predicts rival pit stops with a Bayesian hazard model; Strategist evolves the optimal remaining-race plan with a DEAP genetic algorithm over a PyTorch tire-degradation network; Ghost Car scores strategies against the real driver's decisions; Principal writes team-radio briefings via LLaMA-3.3-70B.\nEverything streams to InfluxDB 3 Core (SQL-native, Apache Arrow) and renders on a 32-panel Grafana dashboard.",
+        impact:
+          "A flagship agentic-AI artifact: real multi-agent orchestration, ML + evolutionary search, time-series engineering, and LLM integration in one system — presented at an InfluxData webinar (July 2026).",
+        stack: ["Python", "LangGraph", "PyTorch", "DEAP", "InfluxDB 3", "Grafana", "Groq LLaMA-3.3"],
+      },
+      links: [
+        { label: "GitHub", href: "https://github.com/rohan-chandrashekar/Pitwall-AI" },
+        { label: "InfluxData Webinar", href: "https://www.influxdata.com/resources/building-agentic-f1-strategy-engine-with-influxdb3/" },
+      ],
+    },
+
+    {
+      slug: "kubemedic",
+      title: "KubeMedic",
+      subtitle:
+        "Safety-gated Kubernetes incident copilot — bounded agentic investigation, human-approved remediation, verified recovery. 100% root-cause accuracy over 35 benchmark incidents.",
+      when: "2026 · Personal project",
+      tags: ["Agentic AI", "Kubernetes", "SRE", "MCP"],
+      highlight: "58s mean time to verified recovery, 100% remediation success across a 35-incident benchmark.",
+      cover: { src: "/images/projects/kubemedic.svg", alt: "KubeMedic architecture diagram" },
+      sections: {
+        overview:
+          "KubeMedic detects faults from Prometheus signals, investigates through read-only MCP tools with a hard call budget, emits a cited hypothesis, proposes one allow-listed remediation, waits for human approval, executes namespace-scoped, and verifies the recovery signal actually returned.",
+        problem:
+          "Kubernetes alerts identify symptoms, not causes. Under a page, an operator correlates metrics, pod state, events, logs, and config changes before acting — slow, repetitive, and risky under pressure. Agentic remediation without guardrails is worse.",
+        approach:
+          "Bounded investigation (read-only tools, hard call budget), evidence-cited hypotheses, an explicit human approval gate the agent cannot bypass, least-privilege execution, and post-remediation verification.\nBenchmarked on 7 scenarios × 5 seeds: 100% detection, 18.7s mean time-to-detect, 21.4s mean diagnosis, 58.0s mean time to verified recovery, 100% root-cause and remediation-class accuracy, 0% over-remediation on the red-herring scenario.",
+        impact:
+          "Shows agentic AI applied with safety engineering discipline — bounded autonomy, human gates, verification — exactly the posture production SRE tooling demands.",
+        stack: ["Python", "Kubernetes", "Prometheus", "MCP", "LLM agents"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/KubeMedic" }],
+    },
+
+    {
+      slug: "triagegraph",
+      title: "TriageGraph",
+      subtitle:
+        "Agentic SOC analyst that autonomously triages SIEM alerts across identity, endpoint, cloud, and email telemetry — grounded in a MITRE ATT&CK RAG corpus, containment gated behind human approval.",
+      when: "2026 · Personal project",
+      tags: ["Agentic AI", "Security Operations", "LangGraph", "RAG"],
+      highlight: "100% triage accuracy and false-positive suppression on seeded scenarios; every containment action human-gated.",
+      cover: { src: "/images/projects/triagegraph.svg", alt: "TriageGraph architecture diagram" },
+      sections: {
+        overview:
+          "A LangGraph multi-agent pipeline with real MCP servers, ATT&CK RAG over 697 techniques, Groq LLaMA-3.3-70B with a deterministic fallback, and a live React console (FastAPI/WebSocket, d3-force).",
+        problem:
+          "SOC teams drown in alert volume — thousands of SIEM alerts a day, mostly noise, each costing analyst minutes to dismiss safely. The result: alert fatigue, missed true positives, slow containment.",
+        approach:
+          "An agent runs the tier-1 investigation for every alert: queries logs, pivots on entities, maps behavior to ATT&CK, and hands humans only the alerts that matter with evidence gathered and containment one approval click away.\nBenchmarked: 100% triage accuracy and 100% false-positive suppression (LLM mode), 25% alert-noise reduction, 100% MCP tool-call success at ~14.7s per investigation.",
+        impact:
+          "Bridges my HPE security background and agentic-AI focus: autonomous where safe, human-gated at the blast radius — with every number reproducible from saved runs.",
+        stack: ["Python", "LangGraph", "MCP", "FastAPI", "React", "Groq LLaMA-3.3", "RAG"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/TriageGraph" }],
+    },
+
+    {
+      slug: "zero-context-retention-engine",
+      title: "Zero-Retention Context Engine",
+      subtitle:
+        "On-device macOS engine that understands the screen while provably retaining no pixels — MobileCLIP embeddings on the Apple Neural Engine, privacy adversarially verified.",
+      when: "2026 · Personal project",
+      tags: ["On-Device AI", "Privacy", "Core ML", "macOS"],
+      highlight: "3ms/frame screen embedding on the Neural Engine; pixels discarded in memory, only vectors kept.",
+      cover: { src: "/images/projects/zero-context-retention-engine.svg", alt: "Zero-Retention Context Engine architecture diagram" },
+      sections: {
+        overview:
+          "A context engine that watches the screen via ScreenCaptureKit, reads it with on-device Vision OCR, embeds frames with MobileCLIP via Core ML, and keeps only L2-normalized vectors — the meaning without the pixels. The privacy claim is adversarially verified, not just asserted.",
+        problem:
+          "Screen-context assistants are a privacy nightmare: they either stream your screen to the cloud or silently retain screenshots. Can a system remember what you saw without keeping anything a human could look at?",
+        approach:
+          "Frames are embedded on the Apple Neural Engine and discarded in memory — measured at 3.0ms median per frame on M1 (329 img/s) and 2.0ms on M5, ~9.6–11.8× faster than CPU, with export correctness verified against the PyTorch reference (0.9965 cosine).\nBuilt entirely on Apple's on-device stack: ScreenCaptureKit, Vision, MobileCLIP, Core ML.",
+        impact:
+          "Rigorous on-device ML engineering: hardware-aware benchmarking, verified model export, and a falsifiable privacy claim — systems thinking applied to the most sensitive data there is.",
+        stack: ["Swift", "Python", "Core ML", "MobileCLIP", "ScreenCaptureKit", "Vision"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/zero-context-retention-engine" }],
+    },
+
+    {
+      slug: "aura",
+      title: "Aura",
+      subtitle:
+        "On-device multimodal accessibility assistant for blind/low-vision and deaf/hard-of-hearing users — real-time scene description, captioning, and sound awareness with zero data leaving the device.",
+      when: "2026 · Personal project",
+      tags: ["Accessibility", "On-Device AI", "Multimodal", "Apple Silicon"],
+      highlight: "29.4 FPS live vision, 3.6% caption WER, ~88× speech-denoiser speedup on the Neural Engine — 0 bytes leave the device.",
+      cover: { src: "/images/projects/aura.svg", alt: "Aura architecture diagram" },
+      sections: {
+        overview:
+          "A private, real-time perceptual aid: it describes the scene and reads text aloud, captions and enhances speech, and fuses sound events with visual context — running entirely on-device on Apple's native stack.",
+        problem:
+          "Existing aids for blind/low-vision and deaf/hard-of-hearing users either require a human or stream the most intimate data imaginable — everything the user sees and hears — to the cloud. That's a privacy violation and too slow for real-time use.",
+        approach:
+          "YOLOv8n detection + OCR + spoken description end-to-end at 40ms (29.4 FPS); on-device speech captioning at 3.6% WER; the speech denoiser moved onto the Neural Engine for an ~88× speedup (1149ms → 13ms per 4s chunk).\nProvably private: 0 bytes written to disk, 0 bytes on the network (verified with lsof). Fairness-audited across 6 English accents and 5 lighting conditions with significance testing.",
+        impact:
+          "Continues the assistive-tech thread from Acoustic Horizons with modern on-device ML: measured performance, fairness auditing, and privacy by construction.",
+        stack: ["Swift", "Core ML", "AVFoundation", "Speech", "SoundAnalysis", "Vision", "YOLOv8"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/Aura-multimodal-apple" }],
+    },
+
+    {
+      slug: "longcache",
+      title: "LongCache",
+      subtitle:
+        "On-device long-context LLM via KV-cache compression on Apple Silicon (MLX) — quantized cache, eviction heuristics, and a learned contextual-bandit eviction policy.",
+      when: "2026 · Personal project",
+      tags: ["LLM Systems", "On-Device AI", "MLX", "Memory Optimization"],
+      highlight: "Long conversations on a fixed memory budget: INT4/8 KV cache + learned eviction vs StreamingLLM/H2O heuristics.",
+      cover: { src: "/images/projects/longcache.svg", alt: "LongCache architecture diagram" },
+      sections: {
+        overview:
+          "On-device LLMs choke on long conversations because the KV cache grows linearly with context. LongCache holds the longest possible conversation on a fixed memory budget by compressing the cache — with every claim measured, never estimated.",
+        problem:
+          "Evict old tokens and the model forgets; keep everything and it crashes with OOM. Offloading to the cloud destroys the privacy that justifies on-device inference in the first place.",
+        approach:
+          "Three levers, benchmarked against a baseline: quantize what you keep (INT4/INT8 K/V), evict with proven heuristics (recency window + heavy-hitter — the StreamingLLM/H2O family), and learn the eviction policy as a contextual bandit.\nQuality measured by perplexity on held-out long text and needle-in-a-haystack retrieval vs context length. The benchmark scripts refuse to run on unsupported hardware rather than emit fabricated numbers.",
+        impact:
+          "LLM-systems depth beyond API calls: memory hierarchies, quantization, eviction policy learning, and honest measurement discipline.",
+        stack: ["Python", "MLX", "mlx-lm", "Apple Silicon"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/KV-MLX-Cache-Optimization" }],
+    },
+
+    {
+      slug: "ecopath",
+      title: "ECOpath",
+      subtitle:
+        "Carbon-aware, agentic multi-modal route planner — hackathon build comparing every way from A to B by carbon, time, and cost, with LLM reasoning over verifiable EPA/IPCC/FTA data.",
+      when: "Apr 2026 · Hackathon",
+      tags: ["Agentic AI", "Sustainability", "Full-Stack", "Hackathon"],
+      highlight: "Three-agent pipeline (routing → emissions → decision) with every gram of CO₂ traceable to a published dataset.",
+      cover: { src: "/images/projects/ecopath.svg", alt: "ECOpath architecture diagram" },
+      sections: {
+        overview:
+          "Most map apps tell you the fastest route. ECOpath shows the greenest, cheapest, and fastest options side-by-side, with a natural-language recommendation that respects real constraints ('be there by 10 AM', 'under $5', 'I care about emissions').",
+        problem:
+          "Carbon-aware routing needs live data, defensible emissions math, and reasoning over user constraints — without hardcoding or hand-waving the numbers.",
+        approach:
+          "A three-stage agentic pipeline with strict boundaries: a Routing Agent fetches live options from the Google Maps API, an Emissions Agent computes physics from EPA/IPCC/FTA datasets, and a Decision Agent (Groq Llama) reasons and explains — no agent reaches around another.\nBuilt with Kiro (hooks, steering, specs), FastAPI, Next.js, Supabase auth, and Google Calendar OAuth.",
+        impact:
+          "A complete agentic product built under hackathon time pressure: multi-agent boundaries, verifiable data lineage, and a polished full-stack UX.",
+        stack: ["Python", "FastAPI", "Next.js", "TypeScript", "Groq Llama", "Google Maps API", "Supabase"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/rohan-chandrashekar/EcoPath" }],
+    },
+
     {
       slug: "acoustic-horizons",
       title: "Acoustic Horizons",
@@ -817,7 +1006,7 @@ export const profile = {
           "Performance Metrics",
         ],
       highlight: "5G slicing simulation with metrics + modular architecture.",
-      cover: { src: "https://opengraph.githubassets.com/e25c1f083c337556201db49a8efd713b40369f37/rohan-chandrashekar/5G-Network-Slicing", alt: "5G Network Slicing Simulation using Python" },
+      cover: { src: "/images/projects/5g-network-slicing.svg", alt: "5G Network Slicing architecture diagram" },
       sections: {
         overview:
           "A simulation project exploring how 5G network slicing can allocate resources across diverse service types — eMBB, mMTC, and URLLC — using a modular Python architecture.",
